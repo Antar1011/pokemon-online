@@ -2,7 +2,9 @@ QT += network \
     xml \
     phonon \
     declarative \
-    opengl
+    opengl \
+    script
+
 TARGET = Pokemon-Online
 DESTDIR = ../../bin
 TEMPLATE = app
@@ -13,9 +15,7 @@ SOURCES += main.cpp \
     client.cpp \
     analyze.cpp \
     serverchoice.cpp \
-    challenge.cpp \
     battlewindow.cpp \
-    pmwindow.cpp \
     controlpanel.cpp \
     basebattlewindow.cpp \
     ranking.cpp \
@@ -26,7 +26,6 @@ SOURCES += main.cpp \
     rearrangewindow.cpp \
     poketablemodel.cpp \
     pokemovesmodel.cpp \
-    Teambuilder/teambuilder.cpp \
     Teambuilder/pokedex.cpp \
     Teambuilder/box.cpp \
     Teambuilder/trainerbody.cpp \
@@ -35,17 +34,35 @@ SOURCES += main.cpp \
     Teambuilder/evmanager.cpp \
     Teambuilder/pokebody.cpp \
     Teambuilder/advanced.cpp \
-    Teambuilder/pokechoice.cpp \
     Teambuilder/teambody.cpp \
-    Teambuilder/teamimporter.cpp \
     Teambuilder/dockinterface.cpp \
     Teambuilder/pokebodywidget.cpp \
     logmanager.cpp \
     poketextedit.cpp \
-	password_wallet.cpp\
+    trainermenu.cpp \
+    pokebuttonsholder.cpp \
+    pokebutton.cpp \
+    teamholder.cpp \
+    teambuilder.cpp \
+    Teambuilder/teambuilder_old.cpp \
+    teammenu.cpp \
+    pokeedit.cpp \
+    evbox.cpp \
+    pokelevelsettings.cpp \
     spectatorwindow.cpp \
     replayviewer.cpp \
-    soundconfigwindow.cpp
+    soundconfigwindow.cpp \
+    password_wallet.cpp \
+    pmsystem.cpp \
+    ivbox.cpp \
+    teamimporter.cpp \
+    challengedialog.cpp \
+    tierratingbutton.cpp \
+    findbattledialog.cpp \
+    teamline.cpp \
+    pokeselection.cpp \
+    pokechoice.cpp \
+    scriptengine.cpp
 HEADERS +=  ../PokemonInfo/pokemoninfo.h \
     menu.h \
     mainwindow.h \
@@ -57,10 +74,8 @@ HEADERS +=  ../PokemonInfo/pokemoninfo.h \
     serverchoice.h \
     ../PokemonInfo/battlestructs.h \
     ../PokemonInfo/networkstructs.h \
-    challenge.h \
     battlewindow.h \
     ../Utilities/functions.h \
-    pmwindow.h \
     controlpanel.h \
     basebattlewindow.h \
     ../PokemonInfo/movesetchecker.h \
@@ -77,7 +92,6 @@ HEADERS +=  ../PokemonInfo/pokemoninfo.h \
     poketablemodel.h \
     modelenum.h \
     pokemovesmodel.h \
-    Teambuilder/teambuilder.h \
     Teambuilder/pokedex.h \
     Teambuilder/box.h \
     Teambuilder/trainerbody.h \
@@ -85,17 +99,14 @@ HEADERS +=  ../PokemonInfo/pokemoninfo.h \
     Teambuilder/pokeballed.h \
     Teambuilder/teambody.h \
     Teambuilder/pokebody.h \
-    Teambuilder/pokechoice.h \
     Teambuilder/evmanager.h \
-    Teambuilder/teamimporter.h \
     Teambuilder/advanced.h \
     Teambuilder/dockinterface.h \
     Teambuilder/pokebodywidget.h \
     engineinterface.h \
     logmanager.h \
-    poketextedit.h \
-	password_wallet.h\
-    spectatorwindow.h \
+    poketextedit.h\
+    password_wallet.h\
     ../BattleManager/battlescene.h \
     ../BattleManager/battleinput.h \
     ../BattleManager/battledatatypes.h \
@@ -103,14 +114,51 @@ HEADERS +=  ../PokemonInfo/pokemoninfo.h \
     ../BattleManager/battleclientlog.h \
     basebattlewindowinterface.h \
     themeaccessor.h \
+    ../Utilities/coreclasses.h \
+    teamholder.h \
+    trainermenu.h \
+    pokebuttonsholder.h \
+    teamholderinterface.h \
+    pokebutton.h \
+    teambuilder.h \
+    Teambuilder/teambuilder_old.h \
+    teammenu.h \
+    teambuilderwidget.h \
+    pokeedit.h \
+    evbox.h \
+    pokelevelsettings.h \
+    soundconfigwindow.h \
     replayviewer.h \
-    soundconfigwindow.h
+    password_wallet.h \
+    pmsystem.h \
+    ivbox.h \
+    teamimporter.h \
+    challengedialog.h \
+    tierratingbutton.h \
+    findbattledialog.h \
+    teamline.h \
+    tieractionfactory.h \
+    pokeselection.h \
+    pokechoice.h \
+    scriptengine.h
 LIBS += -L../../bin \
     -lpokemonlib \
     -lutilities \
     -lbattlelib
 QMAKE_CXXFLAGS += "-std=c++0x -U__STRICT_ANSI__"
-FORMS += controlpanel.ui
+FORMS += controlpanel.ui \
+    trainermenu.ui \
+    pokebuttonsholder.ui \
+    pokebutton.ui \
+    pokeedit.ui \
+    evbox.ui \
+    pokelevelsettings.ui \
+    ivbox.ui \
+    challengedialog.ui \
+    tierratingbutton.ui \
+    findbattledialog.ui \
+    teamline.ui \
+    pokeselection.ui
 TRANSLATIONS = translation_cz.ts \
     translation_de.ts \
     translation_es.ts \
