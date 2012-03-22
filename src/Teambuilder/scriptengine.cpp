@@ -59,3 +59,8 @@ void ScriptEngine::printLine(const QString &message)
 {
     qDebug() << message;
 }
+
+void ScriptEngine::warn(const QString &function, const QString &message)
+{
+    printLine(QString("Script Warning in %1: %2").arg(function, message));
+}
