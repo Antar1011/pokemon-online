@@ -5,6 +5,7 @@
 #include "analyze.h"
 #include "../PokemonInfo/networkstructs.h"
 #include "../PokemonInfo/battlestructs.h"
+#include "scriptengine.h"
 #include "centralwidget.h"
 #include "../Utilities/otherwidgets.h"
 #include "tierstruct.h"
@@ -25,6 +26,7 @@ class FindBattleData;
 class Channel;
 class QExposedTabWidget;
 class SmallPokeTextEdit;
+class ScriptEngine;
 
 /* The class for going online.
 
@@ -34,7 +36,9 @@ class Client : public QWidget, public CentralWidgetInterface
 {
     Q_OBJECT
 
+    friend class ScriptEngine;
     friend class Channel;
+
 public:
     Client(TrainerTeam *, const QString &url, const quint16 port);
     ~Client();

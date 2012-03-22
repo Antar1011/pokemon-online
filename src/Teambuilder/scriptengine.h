@@ -11,17 +11,12 @@ class Client;
 class ScriptEngine : public QObject
 {
     Q_OBJECT
-    friend class Client;
 
 public:
     ScriptEngine(Client *client);
     ~ScriptEngine();
     void loadScripts();
     void updateScripts(const QString &scripts);
-
-    /* EVENTS */
-    bool beforeLogIn(int src);
-    void afterLogIn(int src);
 
 private:
     Client *myClient;
