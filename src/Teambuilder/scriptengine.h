@@ -33,6 +33,7 @@ private:
     void evaluate(const QScriptValue &expression);
     void startStopEvent();
     bool endStopEvent();
+    void printLine(const QString &message);
 
     template<typename ...Params>
     void MakeEvent(const QString &event, const Params&&... params);

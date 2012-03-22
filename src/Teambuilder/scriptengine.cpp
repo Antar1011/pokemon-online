@@ -1,5 +1,7 @@
 #include "scriptengine.h"
 
+// printLine() is just a qDebug() as for now. We'll have a console or something later.
+
 ScriptEngine::ScriptEngine(Client *client)
 {
     setParent(client);
@@ -9,8 +11,6 @@ ScriptEngine::ScriptEngine(Client *client)
     myEngine.globalObject().setProperty("sys", sys);
 
     loadScripts();
-
-
 }
 
 ScriptEngine::~ScriptEngine()
@@ -41,8 +41,7 @@ void ScriptEngine::updateScripts(const QString &scripts)
 void ScriptEngine::evaluate(const QScriptValue &expression)
 {
     if(expression.isError()) {
-        // Not done, bro.
-        //printLine(QString("Script Error in line %1: %2").arg(myEngine.uncaughtExceptionLineNumber()).arg(expression.toString()));
+        printLine(QString("Script Error in line %1: %2").arg(myEngine.uncaughtExceptionLineNumber()).arg(expression.toString()));
     }
 }
 
@@ -54,4 +53,9 @@ bool ScriptEngine::endStopEvent() {
     bool res = stopEvents.back();
     stopEvents.pop_back();
     return res;
+}
+
+void ScriptEngine::printLine(const QString &message)
+{
+    qDebug() << message;
 }
