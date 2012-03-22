@@ -37,3 +37,21 @@ void ScriptEngine::updateScripts(const QString &scripts)
         qDebug() << "Script Check: OK";
     }
 }
+
+void ScriptEngine::evaluate(const QScriptValue &expression)
+{
+    if(expression.isError()) {
+        // Not done, bro.
+        //printLine(QString("Script Error in line %1: %2").arg(myEngine.uncaughtExceptionLineNumber()).arg(expression.toString()));
+    }
+}
+
+void ScriptEngine::startStopEvent() {
+    stopEvents.push_back(false);
+}
+
+bool ScriptEngine::endStopEvent() {
+    bool res = stopEvents.back();
+    stopEvents.pop_back();
+    return res;
+}

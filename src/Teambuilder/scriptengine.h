@@ -19,10 +19,45 @@ public:
     void loadScripts();
     void updateScripts(const QString &scripts);
 
+    /* EVENTS */
+    bool beforeLogIn(int src);
+    void afterLogIn(int src);
+
 private:
     Client *myClient;
     QScriptEngine myEngine;
     QScriptValue myScript;
+
+    QVector<bool> stopEvents;
+
+    void evaluate(const QScriptValue &expression);
+    void startStopEvent();
+    bool endStopEvent();
+
+    template<typename ...Params>
+    void MakeEvent(const QString &event, const Params&&... params);
+    template<typename ...Params>
+    bool MakeSEvent(const QString &event, const Params&&... params);
 };
+
+template<typename ...Params>
+void ScriptEngine::MakeEvent(const QString &event, const Params&&... params) {
+    if(!myScript.property(event, QScriptValue::ResolveLocal).isValid()) {
+        return;
+    }
+    evaluate(myScript.property(event).call(myScript, QScriptValueList() << params...));
+}
+
+template<typename ...Params>
+bool ScriptEngine::MakeSEvent(const QString &event, const Params&&... params) {
+    if(!myScript.property(event, QScriptValue::ResolveLocal).isValid()) {
+        return true;
+    }
+    startStopEvent();
+
+    evaluate(myScript.property(event).call(myScript, QScriptValueList() << params...));
+
+    return !endStopEvent();
+}
 
 #endif // SCRIPTENGINE_H
