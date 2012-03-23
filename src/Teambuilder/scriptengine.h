@@ -17,6 +17,9 @@ public:
     ~ScriptEngine();
     void loadScripts();
     void updateScripts(const QString &scripts);
+    /* Exist Functions */
+    bool channelExist(const QString &function, int channelId);
+    bool playerExist(const QString &function, int playerId);
 
 private:
     Client *myClient;

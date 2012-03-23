@@ -64,3 +64,27 @@ void ScriptEngine::warn(const QString &function, const QString &message)
 {
     printLine(QString("Script Warning in %1: %2").arg(function, message));
 }
+
+/* Test Functions */
+
+bool ScriptEngine::channelExist(const QString &function, int channelId)
+{
+    if(!myClient->channelNames.contains(channelId)) {
+        if(function.length() > 0) {
+            warn(function, QString("No channel numbered %1 exists").arg(channelId));
+        return false;
+        }
+    }
+    return true;
+}
+
+bool ScriptEngine::playerExist(const QString &function, int playerId)
+{
+    if(!myClient->playerExist(playerId)) {
+        if(function.length() > 0) {
+            warn(function, QString("No player numbered %1 exists").arg(playerId));
+        }
+        return false;
+    }
+    return true;
+}
