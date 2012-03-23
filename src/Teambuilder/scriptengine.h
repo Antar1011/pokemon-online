@@ -20,6 +20,13 @@ public:
     /* Exist Functions */
     bool channelExist(const QString &function, int channelId);
     bool playerExist(const QString &function, int playerId);
+    /* Messages */
+    Q_INVOKABLE void clearChat();
+    Q_INVOKABLE QString getAnnouncement();
+    Q_INVOKABLE void print(QScriptContext *context, QScriptEngine *);
+    Q_INVOKABLE void sendMessage(const QString &message, int channelId);
+    Q_INVOKABLE void sendPM(int playerId, const QString &message);
+    /* Players */
 
 private:
     Client *myClient;

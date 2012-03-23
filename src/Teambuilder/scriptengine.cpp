@@ -1,4 +1,5 @@
 #include "scriptengine.h"
+#include "poketextedit.h"
 
 // printLine() is just a qDebug() as for now. We'll have a console or something later.
 
@@ -87,4 +88,47 @@ bool ScriptEngine::playerExist(const QString &function, int playerId)
         return false;
     }
     return true;
+}
+
+/* Messages */
+
+void ScriptEngine::clearChat()
+{
+    myClient->mychat->clear();
+}
+
+QString ScriptEngine::getAnnouncement()
+{
+    return myClient->announcement->toPlainText();
+}
+
+void ScriptEngine::print(QScriptContext *context, QScriptEngine *)
+{
+    QString result;
+    for (int i = 0; i < context->argumentCount(); ++i) {
+        if(i > 0) {
+            result.append(" ");
+        }
+        result.append(context->argument(i).toString());
+    }
+    printLine(result);
+}
+
+void ScriptEngine::sendMessage(const QString &message, int channelId)
+{
+    if(channelExist("sendMessage(message, channelId)", channelId) && message.length() > 0) {
+        myClient->relay().sendChanMessage(channelId, message);
+    }
+}
+
+void ScriptEngine::sendPM(int playerId, const QString &message)
+{
+    if(!myClient->pmedPlayers.contains(playerId) && message.length() > 0) {
+        myClient->startPM(playerId);
+        myClient->relay().sendPM(playerId, message);
+    }
+    if(message.length() > 0) {
+        myClient->relay().sendPM(playerId, message);
+    }
+
 }
