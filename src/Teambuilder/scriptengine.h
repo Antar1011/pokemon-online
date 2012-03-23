@@ -20,6 +20,12 @@ public:
     /* Exist Functions */
     bool channelExist(const QString &function, int channelId);
     bool playerExist(const QString &function, int playerId);
+    /* Events */
+    bool beforeExit();
+
+    /* Common script functions */
+    Q_INVOKABLE void stopEvent();
+
     /* Messages */
     Q_INVOKABLE void clearChat();
     Q_INVOKABLE QString getAnnouncement();

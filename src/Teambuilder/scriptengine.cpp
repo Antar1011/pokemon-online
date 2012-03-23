@@ -90,6 +90,24 @@ bool ScriptEngine::playerExist(const QString &function, int playerId)
     return true;
 }
 
+/* Events */
+
+bool ScriptEngine::beforeExit()
+{
+    return MakeSEvent("beforeExit");   
+}
+
+/* Common functions */
+
+void ScriptEngine::stopEvent()
+{
+    if (stopEvents.size() == 0) {
+        printLine("Script Warning: calling sys.stopEvent() in an unstoppable event.");
+    } else {
+        stopEvents.back() = true;
+    }
+}
+
 /* Messages */
 
 void ScriptEngine::clearChat()

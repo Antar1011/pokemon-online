@@ -1,6 +1,7 @@
 QT += network \
     xml \
     phonon \
+    script \
     declarative \
     opengl
 TARGET = Pokemon-Online
@@ -45,7 +46,8 @@ SOURCES += main.cpp \
 	password_wallet.cpp\
     spectatorwindow.cpp \
     replayviewer.cpp \
-    soundconfigwindow.cpp
+    soundconfigwindow.cpp \
+    scriptengine.cpp
 HEADERS +=  ../PokemonInfo/pokemoninfo.h \
     menu.h \
     mainwindow.h \
@@ -104,7 +106,8 @@ HEADERS +=  ../PokemonInfo/pokemoninfo.h \
     basebattlewindowinterface.h \
     themeaccessor.h \
     replayviewer.h \
-    soundconfigwindow.h
+    soundconfigwindow.h \
+    scriptengine.h
 LIBS += -L../../bin \
     -lpokemonlib \
     -lutilities \

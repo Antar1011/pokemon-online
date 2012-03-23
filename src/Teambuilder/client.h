@@ -119,6 +119,9 @@ public:
     TierNode tierRoot;
     QStringList tierList;
 public slots:
+    /* check if ScriptEngine is ok with the exit */
+    void checkExit();
+
     void errorFromNetwork(int errnum, const QString &error);
     void connected();
     void disconnected();
@@ -348,6 +351,8 @@ private:
     /* Password Wallet */
     PasswordWallet wallet;
 
+    ScriptEngine *myEngine;
+
     PlayerInfo & playerInfo(int id);
     void updateState(int player);
     /* Returns the challenge window displaying that player or NULL otherwise */
@@ -361,7 +366,6 @@ private:
     time_t lastAutoPM;
 };
 
-<<<<<<< HEAD
 class BattleFinder : public QWidget
 {
     Q_OBJECT
@@ -377,9 +381,6 @@ private:
     QComboBox *mode;
     QCheckBox *clauses[ChallengeInfo::numberOfClauses];
     QLineEdit *range;
-
-    /* Scripting Engine */
-    ScriptEngine *myEngine;
 };
 
 #endif // CLIENT_H

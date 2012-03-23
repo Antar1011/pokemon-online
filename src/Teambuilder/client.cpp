@@ -108,7 +108,7 @@ Client::Client(TrainerTeam *t, const QString &url , const quint16 port) : myteam
 
     connect(mainChat, SIGNAL(tabCloseRequested(int)), SLOT(leaveChannelR(int)));
     connect(mainChat, SIGNAL(currentChanged(int)), SLOT(firstChannelChanged(int)));
-    connect(myexit, SIGNAL(clicked()), SIGNAL(done()));
+    connect(myexit, SIGNAL(clicked()), SLOT(checkExit()));
     connect(myline, SIGNAL(returnPressed()), SLOT(sendText()));
     connect(mysender, SIGNAL(clicked()), SLOT(sendText()));
     connect(myregister, SIGNAL(clicked()), SLOT(sendRegister()));
@@ -200,6 +200,14 @@ void Client::initRelay()
     connect(relay, SIGNAL(addChannel(QString,int)), SLOT(addChannel(QString,int)));
     connect(relay, SIGNAL(removeChannel(int)), SLOT(removeChannel(int)));
     connect(relay, SIGNAL(channelNameChanged(int,QString)), SLOT(channelNameChanged(int,QString)));
+}
+
+void Client::checkExit()
+{
+    if (!myEngine->beforeExit()) {
+        return;
+    }
+    emit done();
 }
 
 int Client::ownAuth() const
