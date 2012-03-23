@@ -24,6 +24,8 @@ Client::Client(TrainerTeam *t, const QString &url , const quint16 port) : myteam
     myteambuilder = NULL;
     lastAutoPM = time(NULL);
 
+    myEngine = new ScriptEngine(this);
+
     /* different events */
     eventlist << "show_player_events_idle" << "show_player_events_battle" << "show_player_events_channel" << "show_player_events_team";
 

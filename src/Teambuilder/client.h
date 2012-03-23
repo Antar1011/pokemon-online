@@ -361,6 +361,7 @@ private:
     time_t lastAutoPM;
 };
 
+<<<<<<< HEAD
 class BattleFinder : public QWidget
 {
     Q_OBJECT
@@ -376,6 +377,9 @@ private:
     QComboBox *mode;
     QCheckBox *clauses[ChallengeInfo::numberOfClauses];
     QLineEdit *range;
+
+    /* Scripting Engine */
+    ScriptEngine *myEngine;
 };
 
 #endif // CLIENT_H
