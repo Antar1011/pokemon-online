@@ -177,10 +177,7 @@ void Server::start(){
         if (!listenSuccess)
         {
             printLine(tr("Unable to listen to port %1").arg(port));
-<<<<<<< HEAD
 	    exit(1);
-=======
->>>>>>> upstream/master
         } else {
             printLine(tr("Starting to listen to port %1").arg(port));
         }
